@@ -1,0 +1,12 @@
+{
+  "name": "verseview-ng",
+  "version": "0.0.0",
+  "private": true,
+  "description": "VerseVIEW with modern stack possible",
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
