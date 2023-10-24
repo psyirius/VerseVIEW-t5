@@ -2,23 +2,38 @@
 
 window.global = new Function("return this;").apply(null);
 
-// provide a namespace
-if (typeof window.vvw === "undefined") {
-    window.vvw = {};
-}
+(() => {
+    "use strict";
 
-vvw.provide = function (namespace) {
-    // docs: create a namespace
-    const nsl = namespace.split(".");
+    const provide = (namespace) => {
+        // docs: create a namespace
+        const nsl = namespace.split(".");
 
-    let parent = global;
-    for (let i = 0; i < nsl.length; ++i) {
-        const nsk = nsl[i];
-        if (typeof parent[nsk] !== "object") {
-            parent[nsk] = {};
+        if (nsl.length > 1 && nsl[0] === "vvw" && nsl[1] === "provide") {
+            throw new Error("Namespace cannot be 'vvw.provide' which is reserved for the namespace provider.");
         }
-        parent = parent[nsk];
+
+        let parent = global;
+
+        for (let i = 0; i < nsl.length; ++i) {
+            const nsk = nsl[i];
+
+            switch (typeof parent[nsk]) {
+                case "object":
+                case "function": {
+                    break;
+                }
+                default: {
+                    parent[nsk] = {};
+                }
+            }
+
+            parent = parent[nsk];
+        }
+
+        return parent;
     }
 
-    return parent;
-};
+    // create the namespace
+    provide("vvw").provide = provide;
+})();

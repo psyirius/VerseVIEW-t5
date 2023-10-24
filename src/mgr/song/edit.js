@@ -52,7 +52,7 @@ class SongEditor {
         fixedcenter: true,
         modal: true,
         visible: false,
-        constraintoviewport: true
+        constraintoviewport: true,
       });
       _panel.render(document.body);
       _panel.setHeader("Song ADD / EDIT");
@@ -64,60 +64,64 @@ class SongEditor {
       _log("Generating Events");
 
       document
-          .getElementById("songEdit_moveSlideLeftButtonID")
-          .addEventListener("click", Y, false);
+        .getElementById("songEdit_moveSlideLeftButtonID")
+        .addEventListener("click", Y, false);
       document
-          .getElementById("songEdit_moveSlideRightButtonID")
-          .addEventListener("click", V, false);
+        .getElementById("songEdit_moveSlideRightButtonID")
+        .addEventListener("click", V, false);
       document
-          .getElementById("songEdit_addSlideButtonID")
-          .addEventListener("click", O, false);
+        .getElementById("songEdit_addSlideButtonID")
+        .addEventListener("click", O, false);
       document
-          .getElementById("songEdit_dupSlideButtonID")
-          .addEventListener("click", t, false);
+        .getElementById("songEdit_dupSlideButtonID")
+        .addEventListener("click", t, false);
       document
-          .getElementById("songEdit_deleteSlideButtonID")
-          .addEventListener("click", K, false);
+        .getElementById("songEdit_deleteSlideButtonID")
+        .addEventListener("click", K, false);
       document
-          .getElementById("songEdit_createSlidesButtonID")
-          .addEventListener("click", H, false);
+        .getElementById("songEdit_createSlidesButtonID")
+        .addEventListener("click", H, false);
       document
-          .getElementById("songEdit_addCatButtonID")
-          .addEventListener("click", z, false);
+        .getElementById("songEdit_addCatButtonID")
+        .addEventListener("click", z, false);
       document
-          .getElementById("se_submitCatButtonID2")
-          .addEventListener("click", a, false);
+        .getElementById("se_submitCatButtonID2")
+        .addEventListener("click", a, false);
       document
-          .getElementById("songnav_category2")
-          .addEventListener("click", s, false);
+        .getElementById("songnav_category2")
+        .addEventListener("click", s, false);
       document
-          .getElementById("se_addFontButtonID2")
-          .addEventListener("click", N, false);
+        .getElementById("se_addFontButtonID2")
+        .addEventListener("click", N, false);
       document
-          .getElementById("se_submitFontButtonID2")
-          .addEventListener("click", L, false);
-      document.getElementById("se_fontID2").addEventListener("change", w, false);
+        .getElementById("se_submitFontButtonID2")
+        .addEventListener("click", L, false);
       document
-          .getElementById("se_fontID2_2")
-          .addEventListener("change", Q, false);
-      document.getElementById("se_presentID").addEventListener("click", g, false);
+        .getElementById("se_fontID2")
+        .addEventListener("change", w, false);
       document
-          .getElementById("songEdit_saveButtonID")
-          .addEventListener("click", U, false);
+        .getElementById("se_fontID2_2")
+        .addEventListener("change", Q, false);
       document
-          .getElementById("songAsNewEdit_saveButtonID")
-          .addEventListener("click", k, false);
+        .getElementById("se_presentID")
+        .addEventListener("click", g, false);
       document
-          .getElementById("songEdit_cancelButtonID")
-          .addEventListener("click", C, false);
+        .getElementById("songEdit_saveButtonID")
+        .addEventListener("click", U, false);
+      document
+        .getElementById("songAsNewEdit_saveButtonID")
+        .addEventListener("click", k, false);
+      document
+        .getElementById("songEdit_cancelButtonID")
+        .addEventListener("click", C, false);
 
       // make it hidden
       document.getElementById("se_catTextID").style.visibility = "hidden";
       document.getElementById("se_submitCatButtonID2").style.visibility =
-          "hidden";
+        "hidden";
       document.getElementById("se_fontTextID").style.visibility = "hidden";
       document.getElementById("se_submitFontButtonID2").style.visibility =
-          "hidden";
+        "hidden";
     }
 
     function _setupSlideTabs() {
@@ -126,17 +130,19 @@ class SongEditor {
       _slideTabs = new YAHOO.widget.TabView();
 
       _slideTabs.addTab(
-          new YAHOO.widget.Tab({
-            label: "1",
-            content: '<textarea id="slide1" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide1_2" style="width: 284px" class="textareaStyle"></textarea>',
-            active: true
-          })
+        new YAHOO.widget.Tab({
+          label: "1",
+          content:
+            '<textarea id="slide1" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide1_2" style="width: 284px" class="textareaStyle"></textarea>',
+          active: true,
+        })
       );
       _slideTabs.addTab(
-          new YAHOO.widget.Tab({
-            label: "2",
-            content: '<textarea id="slide2" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide2_2" style="width: 284px" class="textareaStyle"></textarea>'
-          })
+        new YAHOO.widget.Tab({
+          label: "2",
+          content:
+            '<textarea id="slide2" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide2_2" style="width: 284px" class="textareaStyle"></textarea>',
+        })
       );
       _slideTabs.appendTo("se_slides");
 
@@ -197,8 +203,8 @@ class SongEditor {
       A = 0;
       for (var ag = 0; ag < aj; ag++) {
         document.getElementById("songnav_category2").options[ag] = new Option(
-            ak[ag],
-            ag
+          ak[ag],
+          ag
         );
         if (af) {
           if (ak[ag] == "My Songs") {
@@ -278,7 +284,7 @@ class SongEditor {
       if (ac) {
         document.getElementById("se_fontTextID").style.visibility = "hidden";
         document.getElementById("se_submitFontButtonID2").style.visibility =
-            "hidden";
+          "hidden";
         _fontFamily.push(ad);
         p(ad, null);
       }
@@ -372,15 +378,15 @@ class SongEditor {
       document.getElementById("se_catTextID").value = "";
       document.getElementById("se_catTextID").style.visibility = "visible";
       document.getElementById("se_submitCatButtonID2").style.visibility =
-          "visible";
+        "visible";
     }
 
     function a() {
       var ad = document.getElementById("se_catTextID").value;
       if (specialCategory(ad)) {
         vvDialog(
-            "Add Edit Song",
-            "Category name starting with 'vv' are reserved."
+          "Add Edit Song",
+          "Category name starting with 'vv' are reserved."
         );
         return false;
       }
@@ -388,7 +394,7 @@ class SongEditor {
       if (ac) {
         document.getElementById("se_catTextID").style.visibility = "hidden";
         document.getElementById("se_submitCatButtonID2").style.visibility =
-            "hidden";
+          "hidden";
         u = ad;
         aa(null);
       }
@@ -460,26 +466,28 @@ class SongEditor {
 
       if (_slideNumber == 1) {
         _slideTabs.addTab(
-            new YAHOO.widget.Tab({
-              label: _slideNumber,
-              content: '<textarea id="' +
-                  primarySlideId +
-                  '" style="width: 284px" class="textareaStyle"></textarea><textarea id="' +
-                  secondarySlideId +
-                  '" style="width: 284px" class="textareaStyle"></textarea>',
-              active: true
-            })
+          new YAHOO.widget.Tab({
+            label: _slideNumber,
+            content:
+              '<textarea id="' +
+              primarySlideId +
+              '" style="width: 284px" class="textareaStyle"></textarea><textarea id="' +
+              secondarySlideId +
+              '" style="width: 284px" class="textareaStyle"></textarea>',
+            active: true,
+          })
         );
       } else {
         _slideTabs.addTab(
-            new YAHOO.widget.Tab({
-              label: _slideNumber,
-              content: '<textarea id="' +
-                  primarySlideId +
-                  '" style="width: 284px" class="textareaStyle"></textarea><textarea id="' +
-                  secondarySlideId +
-                  '" style="width: 284px" class="textareaStyle"></textarea>'
-            })
+          new YAHOO.widget.Tab({
+            label: _slideNumber,
+            content:
+              '<textarea id="' +
+              primarySlideId +
+              '" style="width: 284px" class="textareaStyle"></textarea><textarea id="' +
+              secondarySlideId +
+              '" style="width: 284px" class="textareaStyle"></textarea>',
+          })
         );
       }
 
@@ -511,27 +519,27 @@ class SongEditor {
       var ak = "";
       ak = ak + '<div class="style2">';
       ak =
-          ak +
-          '<textarea id="se_quickSlideID" rows="20" style="width: 390px" class="textareaStyle4songslide"></textarea>';
+        ak +
+        '<textarea id="se_quickSlideID" rows="20" style="width: 390px" class="textareaStyle4songslide"></textarea>';
       ak =
-          ak +
-          '<textarea id="se_quickSlideID_2" rows="20" style="width: 390px" class="textareaStyle4songslide"></textarea><br>';
+        ak +
+        '<textarea id="se_quickSlideID_2" rows="20" style="width: 390px" class="textareaStyle4songslide"></textarea><br>';
       ak = ak + "<i>Seperate the slides with 2 new lines. </i><br><br>";
       ak =
-          ak +
-          '<br><input type="button" id="se_generateID" value=" GENERATE SLIDES ">';
+        ak +
+        '<br><input type="button" id="se_generateID" value=" GENERATE SLIDES ">';
       ak =
-          ak +
-          '<input type="button" id="se_generateMunglishID" value=" TRANSLITERATE ">';
+        ak +
+        '<input type="button" id="se_generateMunglishID" value=" TRANSLITERATE ">';
       ak =
-          ak +
-          '<input type="button" id="se_generateCancelID" value=" CANCEL "></DIV>';
+        ak +
+        '<input type="button" id="se_generateCancelID" value=" CANCEL "></DIV>';
       var ac = new YAHOO.widget.Panel("gpanelObj", {
         width: "800px",
         fixedcenter: true,
         modal: true,
         visible: false,
-        constraintoviewport: true
+        constraintoviewport: true,
       });
       ac.render(document.body);
       ac.setHeader("Generate Slides");
@@ -542,14 +550,14 @@ class SongEditor {
       $("#se_quickSlideID").height(windowHeight);
       $("#se_quickSlideID_2").height(windowHeight);
       document
-          .getElementById("se_generateID")
-          .addEventListener("click", ao, false);
+        .getElementById("se_generateID")
+        .addEventListener("click", ao, false);
       document
-          .getElementById("se_generateMunglishID")
-          .addEventListener("click", ap, false);
+        .getElementById("se_generateMunglishID")
+        .addEventListener("click", ap, false);
       document
-          .getElementById("se_generateCancelID")
-          .addEventListener("click", ah, false);
+        .getElementById("se_generateCancelID")
+        .addEventListener("click", ah, false);
       var al = document.getElementById("se_fontID2").selectedIndex;
       var ad = document.getElementById("se_fontID2").options[al].text;
       document.getElementById("se_quickSlideID").style.fontFamily = ad;
@@ -564,20 +572,20 @@ class SongEditor {
 
       for (var slideIndex = 1; slideIndex <= numSlides; slideIndex++) {
         primarySlidesList.push(
-            document.getElementById("slide" + slideIndex).value
+          document.getElementById("slide" + slideIndex).value
         );
         secondarySlidesList.push(
-            document.getElementById("slide" + slideIndex + "_2").value
+          document.getElementById("slide" + slideIndex + "_2").value
         );
       }
 
       // write content to the textarea (primary and secondary)
       document.getElementById("se_quickSlideID").value = primarySlidesList
-          .join("\n\n\n")
-          .trim();
+        .join("\n\n\n")
+        .trim();
       document.getElementById("se_quickSlideID_2").value = secondarySlidesList
-          .join("\n\n\n")
-          .trim();
+        .join("\n\n\n")
+        .trim();
 
       ac.show();
       ac.bringToTop();
@@ -618,14 +626,14 @@ class SongEditor {
 
       function af() {
         document
-            .getElementById("se_generateID")
-            .removeEventListener("click", ao, false);
+          .getElementById("se_generateID")
+          .removeEventListener("click", ao, false);
         document
-            .getElementById("se_generateMunglishID")
-            .removeEventListener("click", ap, false);
+          .getElementById("se_generateMunglishID")
+          .removeEventListener("click", ap, false);
         document
-            .getElementById("se_generateCancelID")
-            .removeEventListener("click", ah, false);
+          .getElementById("se_generateCancelID")
+          .removeEventListener("click", ah, false);
       }
 
       function ap() {
@@ -640,8 +648,8 @@ class SongEditor {
         av = null;
         document.getElementById("se_quickSlideID_2").value = aw;
         vvDialog(
-            "Lyrics Transliteration",
-            "Transliteration is only valid for Malayalam and it is not 100% accurate."
+          "Lyrics Transliteration",
+          "Transliteration is only valid for Malayalam and it is not 100% accurate."
         );
       }
     }
@@ -671,7 +679,7 @@ class SongEditor {
       document.getElementById("se_fontTextID").value = "";
       document.getElementById("se_fontTextID").style.visibility = "visible";
       document.getElementById("se_submitFontButtonID2").style.visibility =
-          "visible";
+        "visible";
     }
 
     function S() {
@@ -683,7 +691,7 @@ class SongEditor {
         vvDialog("Add Edit Songs", "Enter a valid Song Name");
         return false;
       } else {
-        var ak = new songObj();
+        var ak = new vvw.song.Song();
         ak.name = ao;
         ao = document.getElementById("songEdit_Name2ID").value;
         ao = ao.replace(/^\s+|\s+$/g, "");
@@ -720,11 +728,13 @@ class SongEditor {
         }
         var ai = document.getElementById("songnav_category2").selectedIndex;
         ak.catIndex =
-            document.getElementById("songnav_category2").options[ai].text;
+          document.getElementById("songnav_category2").options[ai].text;
         ak.subcat = "";
         if (!specialCategory(ak.catIndex)) {
-          if (ak.catIndex == "VV Malayalam 2021" ||
-              ak.catIndex == "VV Hindi 2021") {
+          if (
+            ak.catIndex == "VV Malayalam 2021" ||
+            ak.catIndex == "VV Hindi 2021"
+          ) {
             var af = document.getElementById("songEdit_SongNumberID").value;
             if (af == "" || af == null) {
               ak.subcat = songNumberObj.assignSongNumber(ak.catIndex);
@@ -754,8 +764,7 @@ class SongEditor {
     function g() {
       _log("Process Present button");
       var ac = _slideTabs.get("activeIndex");
-      var ae = new songObj();
-      ae = S();
+      var ae = S();
       if (ae != false) {
         var ad = new songPresentObj();
         ad.init(ae);
@@ -765,8 +774,7 @@ class SongEditor {
 
     function U() {
       _log("Process Save button");
-      var ac = new songObj();
-      ac = S();
+      var ac = S();
       if (ac != false) {
         if (!b) {
           _log("Adding song..");
@@ -793,8 +801,7 @@ class SongEditor {
     }
 
     function j() {
-      var ad = new songObj();
-      ad = S();
+      var ad = S();
       if (ad != false) {
         for (var ac = 0; ac < 200; ac++) {
           ad.name = "Test Song_" + ac;
@@ -897,5 +904,5 @@ class SongEditor {
   }
 }
 
-vvw.provide('vvw.song')
+vvw.provide("vvw.song");
 vvw.song.Editor = SongEditor;
