@@ -4,6 +4,7 @@
   "private": true,
   "description": "VerseVIEW with modern stack possible",
   "scripts": {
+    "dev": "adl ./VerseVIEW-app.xml"
   },
   "dependencies": {
   },
