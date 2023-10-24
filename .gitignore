@@ -20,6 +20,8 @@ dist/
 # build
 js/app
 js/lib
+js/mgr
 
 css/app
 css/lib
+css/mgr

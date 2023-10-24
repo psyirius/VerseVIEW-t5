@@ -90,15 +90,11 @@ function songEditClass() {
     document
       .getElementById("se_submitFontButtonID2")
       .addEventListener("click", L, false);
-    document
-      .getElementById("se_fontID2")
-      .addEventListener("change", w, false);
+    document.getElementById("se_fontID2").addEventListener("change", w, false);
     document
       .getElementById("se_fontID2_2")
       .addEventListener("change", Q, false);
-    document
-      .getElementById("se_presentID")
-      .addEventListener("click", g, false);
+    document.getElementById("se_presentID").addEventListener("click", g, false);
     document
       .getElementById("songEdit_saveButtonID")
       .addEventListener("click", U, false);
@@ -111,9 +107,11 @@ function songEditClass() {
 
     // make it hidden
     document.getElementById("se_catTextID").style.visibility = "hidden";
-    document.getElementById("se_submitCatButtonID2").style.visibility = "hidden";
+    document.getElementById("se_submitCatButtonID2").style.visibility =
+      "hidden";
     document.getElementById("se_fontTextID").style.visibility = "hidden";
-    document.getElementById("se_submitFontButtonID2").style.visibility = "hidden";
+    document.getElementById("se_submitFontButtonID2").style.visibility =
+      "hidden";
   }
 
   function _setupSlideTabs() {
@@ -124,14 +122,16 @@ function songEditClass() {
     _slideTabs.addTab(
       new YAHOO.widget.Tab({
         label: "1",
-        content: '<textarea id="slide1" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide1_2" style="width: 284px" class="textareaStyle"></textarea>',
+        content:
+          '<textarea id="slide1" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide1_2" style="width: 284px" class="textareaStyle"></textarea>',
         active: true,
       })
     );
     _slideTabs.addTab(
       new YAHOO.widget.Tab({
         label: "2",
-        content: '<textarea id="slide2" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide2_2" style="width: 284px" class="textareaStyle"></textarea>',
+        content:
+          '<textarea id="slide2" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide2_2" style="width: 284px" class="textareaStyle"></textarea>',
       })
     );
     _slideTabs.appendTo("se_slides");
@@ -367,7 +367,8 @@ function songEditClass() {
   function z() {
     document.getElementById("se_catTextID").value = "";
     document.getElementById("se_catTextID").style.visibility = "visible";
-    document.getElementById("se_submitCatButtonID2").style.visibility = "visible";
+    document.getElementById("se_submitCatButtonID2").style.visibility =
+      "visible";
   }
 
   function a() {
@@ -533,7 +534,7 @@ function songEditClass() {
     ac.render(document.body);
     ac.setHeader("Generate Slides");
     ac.setBody(ak);
-    
+
     var windowHeight = $(window).height();
     windowHeight = windowHeight * 0.8;
     $("#se_quickSlideID").height(windowHeight);
@@ -560,13 +561,21 @@ function songEditClass() {
     var secondarySlidesList = [];
 
     for (var slideIndex = 1; slideIndex <= numSlides; slideIndex++) {
-      primarySlidesList.push(document.getElementById("slide" + slideIndex).value);
-      secondarySlidesList.push(document.getElementById("slide" + slideIndex + "_2").value);
+      primarySlidesList.push(
+        document.getElementById("slide" + slideIndex).value
+      );
+      secondarySlidesList.push(
+        document.getElementById("slide" + slideIndex + "_2").value
+      );
     }
 
     // write content to the textarea (primary and secondary)
-    document.getElementById("se_quickSlideID").value = primarySlidesList.join("\n\n\n").trim();
-    document.getElementById("se_quickSlideID_2").value = secondarySlidesList.join("\n\n\n").trim();
+    document.getElementById("se_quickSlideID").value = primarySlidesList
+      .join("\n\n\n")
+      .trim();
+    document.getElementById("se_quickSlideID_2").value = secondarySlidesList
+      .join("\n\n\n")
+      .trim();
 
     ac.show();
     ac.bringToTop();
@@ -870,7 +879,8 @@ function songEditClass() {
     var year = now.getFullYear();
     var hours = now.getHours();
     var minutes = now.getMinutes();
-    var timestampStr = month + "/" + day + "/" + year + "  " + hours + ":" + minutes;
+    var timestampStr =
+      month + "/" + day + "/" + year + "  " + hours + ":" + minutes;
     _log("Timestamp: " + timestampStr);
     return timestampStr;
   }
