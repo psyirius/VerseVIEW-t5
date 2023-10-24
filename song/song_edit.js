@@ -1,46 +1,61 @@
 function songEditClass() {
-  this.init = X;
-  this.showEditPanel = m;
-  this.setEditPrimaryKey = J;
+  var DEBUG_MODE = false;
   var b = false;
   var v = -1;
-  var q = -1;
+  var _editPrimaryKey = -1;
   var Z = false;
-  var y = false;
-  var f = "";
-  var i = null;
-  var I;
+  var _body = "";
+  var _panel = null;
+  var _slideTabs;
   var u = "";
   var A = 0;
   var D = "";
   var d = 0;
-  var e = new Array();
-  var n = 1;
-  function X(ac) {
-    E("Initialize Song Edit Panel");
-    e = ["Arial", "Times New Roman", "Calibri"];
-    f = ac;
-    R();
+  var _fontFamily = [];
+  var _slideNumber = 1;
+
+  this.init = function init(bodyContent) {
+    _log("Initialize Song Edit Panel");
+    _fontFamily = ["Arial", "Times New Roman", "Calibri"];
+    _body = bodyContent;
+    _setupPanel();
     p();
-    P();
-    ab();
-  }
-  function R() {
-    E("Generating Panel");
-    i = new YAHOO.widget.Panel("panelObj", {
+    _setupSlideTabs();
+    _setupEvents();
+  };
+  this.showEditPanel = function showEditPanel(props, ad, ae, af) {
+    b = ad;
+    v = ae;
+    _editPrimaryKey = null;
+    Z = af;
+    if (af == null) {
+      Z = false;
+    }
+    _loadProps(props);
+    _panel.show();
+  };
+  this.setEditPrimaryKey = function setEditPrimaryKey(editPrimaryKey) {
+    _editPrimaryKey = editPrimaryKey;
+  };
+
+  function _setupPanel() {
+    _log("Generating Panel");
+    _panel = new YAHOO.widget.Panel("panelObj", {
       width: "600px",
       fixedcenter: true,
       modal: true,
       visible: false,
       constraintoviewport: true,
     });
-    i.render(document.body);
-    i.setHeader("Song ADD / EDIT");
-    i.setBody(f);
-    i.hide();
+    _panel.render(document.body);
+    _panel.setHeader("Song ADD / EDIT");
+    _panel.setBody(_body);
+    _panel.hide();
   }
-  function ab() {
-    E("Generating Events");
+
+  function _setupEvents() {
+    _log("Generating Events");
+
     document
       .getElementById("songEdit_moveSlideLeftButtonID")
       .addEventListener("click", Y, false);
@@ -74,11 +89,15 @@ function songEditClass() {
     document
       .getElementById("se_submitFontButtonID2")
       .addEventListener("click", L, false);
-    document.getElementById("se_fontID2").addEventListener("change", w, false);
+    document
+      .getElementById("se_fontID2")
+      .addEventListener("change", w, false);
     document
       .getElementById("se_fontID2_2")
       .addEventListener("change", Q, false);
-    document.getElementById("se_presentID").addEventListener("click", g, false);
+    document
+      .getElementById("se_presentID")
+      .addEventListener("click", g, false);
     document
       .getElementById("songEdit_saveButtonID")
       .addEventListener("click", U, false);
@@ -88,55 +107,57 @@ function songEditClass() {
     document
       .getElementById("songEdit_cancelButtonID")
       .addEventListener("click", C, false);
+
+    // make it hidden
     document.getElementById("se_catTextID").style.visibility = "hidden";
-    document.getElementById("se_submitCatButtonID2").style.visibility =
-      "hidden";
+    document.getElementById("se_submitCatButtonID2").style.visibility = "hidden";
     document.getElementById("se_fontTextID").style.visibility = "hidden";
-    document.getElementById("se_submitFontButtonID2").style.visibility =
-      "hidden";
+    document.getElementById("se_submitFontButtonID2").style.visibility = "hidden";
   }
-  function J(ac) {
-    q = ac;
-  }
-  function P() {
-    E("Init Slide Tabs");
-    I = new YAHOO.widget.TabView();
-    I.addTab(
+
+  function _setupSlideTabs() {
+    _log("Init Slide Tabs");
+
+    _slideTabs = new YAHOO.widget.TabView();
+
+    _slideTabs.addTab(
       new YAHOO.widget.Tab({
         label: "1",
-        content:
-          '<textarea id="slide1" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide1_2" style="width: 284px" class="textareaStyle"></textarea>',
+        content: '<textarea id="slide1" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide1_2" style="width: 284px" class="textareaStyle"></textarea>',
         active: true,
       })
     );
-    I.addTab(
+    _slideTabs.addTab(
       new YAHOO.widget.Tab({
         label: "2",
-        content:
-          '<textarea id="slide2" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide2_2" style="width: 284px" class="textareaStyle"></textarea>',
+        content: '<textarea id="slide2" style="width: 284px" class="textareaStyle"></textarea><textarea id="slide2_2" style="width: 284px" class="textareaStyle"></textarea>',
       })
     );
-    I.appendTo("se_slides");
+    _slideTabs.appendTo("se_slides");
+
     var ac = document.getElementById("se_fontID2").selectedIndex;
     tempFont = document.getElementById("se_fontID2").options[ac].text;
     document.getElementById("slide1").style.fontFamily = tempFont;
     document.getElementById("slide2").style.fontFamily = tempFont;
+
     var ac = document.getElementById("se_fontID2_2").selectedIndex;
     tempFont = document.getElementById("se_fontID2_2").options[ac].text;
     document.getElementById("slide1_2").style.fontFamily = tempFont;
     document.getElementById("slide2_2").style.fontFamily = tempFont;
   }
+
   function T() {
     var ac = 0;
-    var ad = I.getTab(ac);
+    var ad = _slideTabs.getTab(ac);
     while (ad != null) {
-      I.removeTab(ad);
-      ad = I.getTab(ac);
+      _slideTabs.removeTab(ad);
+      ad = _slideTabs.getTab(ac);
     }
-    n = 1;
+    _slideNumber = 1;
   }
+
   function aa(ac) {
-    var ak = new Array();
+    var ak = [];
     ak.push("My Songs");
     var af = false;
     if (ac != null) {
@@ -193,24 +214,25 @@ function songEditClass() {
     u = "";
     document.getElementById("songnav_category2").selectedIndex = A;
   }
+
   function p(ad, ak) {
     var al = songManagerObj.getFontList();
-    var ao = new Array();
+    var ao;
     var af = null;
     var ap = 0;
     var an = 0;
     if (al != null) {
-      var am = e.length;
+      var am = _fontFamily.length;
       for (var ah = am - 1; ah >= 0; ah--) {
         var at = al.length;
-        af = al.indexOf(e[ah]);
+        af = al.indexOf(_fontFamily[ah]);
         if (af != -1) {
-          e.splice(ah, 1);
+          _fontFamily.splice(ah, 1);
         }
       }
-      ao = e.concat(al);
+      ao = _fontFamily.concat(al);
     } else {
-      ao = e;
+      ao = _fontFamily;
     }
     ao = ao.concat(systemFontList);
     ao.sort();
@@ -244,6 +266,7 @@ function songEditClass() {
       document.getElementById("se_fontID2_2").selectedIndex = an;
     }
   }
+
   function L() {
     var ad = document.getElementById("se_fontTextID").value;
     var ac = F(ad);
@@ -251,68 +274,76 @@ function songEditClass() {
       document.getElementById("se_fontTextID").style.visibility = "hidden";
       document.getElementById("se_submitFontButtonID2").style.visibility =
         "hidden";
-      e.push(ad);
+      _fontFamily.push(ad);
       p(ad, null);
     }
   }
+
   function w() {
     var ag = document.getElementById("se_fontID2").selectedIndex;
     var af = document.getElementById("se_fontID2").options[ag].text;
     var ae = "";
     var ac = 0;
-    var ad = I.getTab(ac);
+    var ad = _slideTabs.getTab(ac);
     while (ad != null) {
       ae = G(ad.get("content"));
       document.getElementById(ae).style.fontFamily = af;
       ac++;
-      ad = I.getTab(ac);
+      ad = _slideTabs.getTab(ac);
     }
   }
+
   function Q() {
     var ag = document.getElementById("se_fontID2_2").selectedIndex;
     var af = document.getElementById("se_fontID2_2").options[ag].text;
     var ae = "";
     var ac = 0;
-    var ad = I.getTab(ac);
+    var ad = _slideTabs.getTab(ac);
     while (ad != null) {
       ae = G(ad.get("content"));
       ae = ae + "_2";
       document.getElementById(ae).style.fontFamily = af;
       ac++;
-      ad = I.getTab(ac);
+      ad = _slideTabs.getTab(ac);
     }
   }
+
   function F(ac) {
     return true;
   }
-  function c(ac) {
-    if (ac != null) {
-      document.getElementById("songEdit_NameID").value = ac.name;
-      document.getElementById("se_copyrightID").value = ac.copyright;
-      document.getElementById("se_yvideoID").value = ac.yvideo;
-      if (specialCategory(ac.catIndex)) {
+
+  function _loadProps(data) {
+    if (data != null) {
+      document.getElementById("songEdit_NameID").value = data.name;
+      document.getElementById("se_copyrightID").value = data.copyright;
+      document.getElementById("se_yvideoID").value = data.yvideo;
+
+      if (specialCategory(data.catIndex)) {
         $("#songEdit_saveButtonID").hide();
       } else {
         $("#songEdit_saveButtonID").show();
       }
-      aa(ac.catIndex);
-      p(ac.font, ac.font2);
-      document.getElementById("se_keyID").value = ac.key;
-      document.getElementById("se_notesID").value = ac.notes;
-      document.getElementById("songEdit_Name2ID").value = ac.name2;
-      document.getElementById("songEdit_SongNumberID").value = ac.subcat;
-      document.getElementById("se_tagID").value = ac.tags;
-      document.getElementById("se_sequenceID").value = ac.slideseq;
+      aa(data.catIndex);
+      p(data.font, data.font2);
+
+      document.getElementById("se_keyID").value = data.key;
+      document.getElementById("se_notesID").value = data.notes;
+      document.getElementById("songEdit_Name2ID").value = data.name2;
+      document.getElementById("songEdit_SongNumberID").value = data.subcat;
+      document.getElementById("se_tagID").value = data.tags;
+      document.getElementById("se_sequenceID").value = data.slideseq;
+
       T();
-      var ag = ac.slides.length;
-      E("number of slides in preload: " + ag);
-      for (var af = 0; af < ag; af++) {
-        var ae = ac.slides[af].replace(/<BR>|<br>/g, "\n");
-        var ad = ac.slides2[af];
-        if (ad != null) {
-          ad = ad.replace(/<BR>|<br>/g, "\n");
+
+      var numSlides = data.slides.length;
+      _log("number of slides in preload: " + numSlides);
+      for (var i = 0; i < numSlides; i++) {
+        var primarySlide = data.slides[i].replace(/<BR>|<br>/g, "\n");
+        var secondarySlide = data.slides2[i];
+        if (secondarySlide != null) {
+          secondarySlide = secondarySlide.replace(/<BR>|<br>/g, "\n");
         }
-        W(ae, ad);
+        _setSlideContent(primarySlide, secondarySlide);
       }
     } else {
       document.getElementById("songEdit_NameID").value = "";
@@ -327,27 +358,17 @@ function songEditClass() {
       document.getElementById("se_tagID").value = "";
       document.getElementById("se_sequenceID").value = "";
       T();
-      W();
-      W();
+      _setSlideContent();
+      _setSlideContent();
     }
   }
-  function m(ac, ad, ae, af) {
-    b = ad;
-    v = ae;
-    q = null;
-    Z = af;
-    if (af == null) {
-      Z = false;
-    }
-    c(ac);
-    i.show();
-  }
+
   function z() {
     document.getElementById("se_catTextID").value = "";
     document.getElementById("se_catTextID").style.visibility = "visible";
-    document.getElementById("se_submitCatButtonID2").style.visibility =
-      "visible";
+    document.getElementById("se_submitCatButtonID2").style.visibility = "visible";
   }
+
   function a() {
     var ad = document.getElementById("se_catTextID").value;
     if (specialCategory(ad)) {
@@ -366,9 +387,10 @@ function songEditClass() {
       aa(null);
     }
   }
+
   function Y() {
     M();
-    var ad = I.get("activeIndex");
+    var ad = _slideTabs.get("activeIndex");
     if (ad != 0) {
       var ai = ad - 1;
       var ag = "slide" + (ad + 1);
@@ -381,14 +403,15 @@ function songEditClass() {
       var ac = document.getElementById(aj).value;
       document.getElementById(aj).value = document.getElementById(af).value;
       document.getElementById(af).value = ac;
-      I.set("activeIndex", ai);
+      _slideTabs.set("activeIndex", ai);
     }
   }
+
   function V() {
     M();
-    var ah = I.get("tabs").length;
-    var ag = I.get("activeIndex");
-    E(ag + "  " + ah);
+    var ah = _slideTabs.get("tabs").length;
+    var ag = _slideTabs.get("activeIndex");
+    _log(ag + "  " + ah);
     if (ag < ah - 1) {
       var aj = parseInt(ag) + 1;
       var af = "slide" + (ag + 1);
@@ -401,73 +424,84 @@ function songEditClass() {
       var ak = document.getElementById(ac).value;
       document.getElementById(ac).value = document.getElementById(ad).value;
       document.getElementById(ad).value = ak;
-      I.set("activeIndex", aj);
+      _slideTabs.set("activeIndex", aj);
     }
   }
+
   function t() {
     M();
-    var ag = I.get("activeIndex") + 1;
-    E("Active tab Index: " + ag);
+    var ag = _slideTabs.get("activeIndex") + 1;
+    _log("Active tab Index: " + ag);
     var ac = "slide" + ag;
     var af = "slide" + ag + "_2";
     var ae = document.getElementById(ac).value;
     var ad = document.getElementById(af).value;
-    W(ae, ad);
+    _setSlideContent(ae, ad);
   }
+
   function O() {
     M();
     var ad = null;
     var ac = null;
-    W(ad, ac);
+    _setSlideContent(ad, ac);
   }
-  function W(af, ac) {
-    var ad = "slide" + n;
-    var ag = "slide" + n + "_2";
-    E("Slide ID: " + ad);
-    if (n == 1) {
-      I.addTab(
+
+  function _setSlideContent(primarySlideContent, secondarySlideContent) {
+    var primarySlideId = "slide" + _slideNumber;
+    var secondarySlideId = "slide" + _slideNumber + "_2";
+
+    _log("Slide ID: " + primarySlideId);
+
+    if (_slideNumber == 1) {
+      _slideTabs.addTab(
         new YAHOO.widget.Tab({
-          label: n,
+          label: _slideNumber,
           content:
             '<textarea id="' +
-            ad +
+            primarySlideId +
             '" style="width: 284px" class="textareaStyle"></textarea><textarea id="' +
-            ag +
+            secondarySlideId +
             '" style="width: 284px" class="textareaStyle"></textarea>',
           active: true,
         })
       );
     } else {
-      I.addTab(
+      _slideTabs.addTab(
         new YAHOO.widget.Tab({
-          label: n,
+          label: _slideNumber,
           content:
             '<textarea id="' +
-            ad +
+            primarySlideId +
             '" style="width: 284px" class="textareaStyle"></textarea><textarea id="' +
-            ag +
+            secondarySlideId +
             '" style="width: 284px" class="textareaStyle"></textarea>',
         })
       );
     }
+
     var ae = document.getElementById("se_fontID2").selectedIndex;
     tempFont = document.getElementById("se_fontID2").options[ae].text;
-    document.getElementById(ad).style.fontFamily = tempFont;
+    document.getElementById(primarySlideId).style.fontFamily = tempFont;
+
     var ae = document.getElementById("se_fontID2_2").selectedIndex;
     tempFont = document.getElementById("se_fontID2_2").options[ae].text;
-    document.getElementById(ag).style.fontFamily = tempFont;
-    if (af != null) {
-      document.getElementById(ad).value = af;
+    document.getElementById(secondarySlideId).style.fontFamily = tempFont;
+
+    if (primarySlideContent != null) {
+      document.getElementById(primarySlideId).value = primarySlideContent;
     } else {
-      document.getElementById(ad).value = "";
+      document.getElementById(primarySlideId).value = "";
     }
-    if (ac != null) {
-      document.getElementById(ag).value = ac;
+
+    if (secondarySlideContent != null) {
+      document.getElementById(secondarySlideId).value = secondarySlideContent;
     } else {
-      document.getElementById(ag).value = "";
+      document.getElementById(secondarySlideId).value = "";
     }
-    n++;
+
+    _slideNumber++;
   }
+
   function H() {
     M();
     var ak = "";
@@ -519,7 +553,7 @@ function songEditClass() {
     var ad = document.getElementById("se_fontID2_2").options[al].text;
     document.getElementById("se_quickSlideID_2").style.fontFamily = ad;
 
-    var numSlides = I.get("tabs").length;
+    var numSlides = _slideTabs.get("tabs").length;
 
     var primarySlidesList = [];
     var secondarySlidesList = [];
@@ -537,7 +571,7 @@ function songEditClass() {
     ac.bringToTop();
 
     function ao() {
-      n = 1;
+      _slideNumber = 1;
       var av = document.getElementById("se_quickSlideID").value;
       var az = av.split("\n\n\n");
       var ar = az.length;
@@ -545,21 +579,21 @@ function songEditClass() {
       var at = au.split("\n\n\n");
       var ay = at.length;
       if (at[0] != null) {
-        W(az[0], at[0]);
+        _setSlideContent(az[0], at[0]);
       } else {
-        W(az[0], null);
+        _setSlideContent(az[0], null);
       }
-      var aw = I.getTab(1);
+      var aw = _slideTabs.getTab(1);
       while (aw != null) {
-        I.removeTab(I.get("activeTab"));
-        aw = I.getTab(1);
+        _slideTabs.removeTab(_slideTabs.get("activeTab"));
+        aw = _slideTabs.getTab(1);
       }
-      n = 2;
+      _slideNumber = 2;
       for (var ax = 1; ax < ar; ax++) {
         if (at[ax] != null) {
-          W(az[ax], at[ax]);
+          _setSlideContent(az[ax], at[ax]);
         } else {
-          W(az[ax], null);
+          _setSlideContent(az[ax], null);
         }
       }
       ah();
@@ -596,34 +630,37 @@ function songEditClass() {
       );
     }
   }
+
   function K() {
     M();
-    var af = I.get("activeIndex");
-    var ac = I.get("tabs").length;
+    var af = _slideTabs.get("activeIndex");
+    var ac = _slideTabs.get("tabs").length;
     for (var ae = 0; ae < ac; ae++) {
       V();
     }
-    var ad = I.getTab(1);
+    var ad = _slideTabs.getTab(1);
     if (ad != null) {
-      I.removeTab(I.get("activeTab"));
+      _slideTabs.removeTab(_slideTabs.get("activeTab"));
       if (ac - 1 == af) {
-        I.set("activeIndex", af - 1);
+        _slideTabs.set("activeIndex", af - 1);
       } else {
-        I.set("activeIndex", af);
+        _slideTabs.set("activeIndex", af);
       }
-      n--;
+      _slideNumber--;
     } else {
       vvDialog("Add Edit Songs", "Can not delete the last Slide");
     }
   }
+
   function N() {
     document.getElementById("se_fontTextID").value = "";
     document.getElementById("se_fontTextID").style.visibility = "visible";
     document.getElementById("se_submitFontButtonID2").style.visibility =
       "visible";
   }
+
   function S() {
-    E("Extract data from Form");
+    _log("Extract data from Form");
     var ao = document.getElementById("songEdit_NameID").value;
     ao = ao.replace(/^\s+|\s+$/g, "");
     ao = ao.replace(/\s\s+/g, " ");
@@ -641,7 +678,7 @@ function songEditClass() {
       var ah = new Array();
       var ac = "";
       var ad = 0;
-      var aj = I.getTab(ad);
+      var aj = _slideTabs.getTab(ad);
       while (aj != null) {
         ac = G(aj.get("content"));
         var an = document.getElementById(ac).value;
@@ -653,7 +690,7 @@ function songEditClass() {
           ah[ad] = "";
         }
         ad++;
-        aj = I.getTab(ad);
+        aj = _slideTabs.getTab(ad);
       }
       ak.slides = ae;
       ak.slides2 = ah;
@@ -687,7 +724,7 @@ function songEditClass() {
       ak.font = document.getElementById("se_fontID2").options[al].text;
       var al = document.getElementById("se_fontID2_2").selectedIndex;
       ak.font2 = document.getElementById("se_fontID2_2").options[al].text;
-      ak.timestamp = h();
+      ak.timestamp = _timestampNow();
       ak.key = document.getElementById("se_keyID").value;
       ak.notes = document.getElementById("se_notesID").value;
       ak.rating = 5;
@@ -700,9 +737,10 @@ function songEditClass() {
       return ak;
     }
   }
+
   function g() {
-    E("Process Present button");
-    var ac = I.get("activeIndex");
+    _log("Process Present button");
+    var ac = _slideTabs.get("activeIndex");
     var ae = new songObj();
     ae = S();
     if (ae != false) {
@@ -711,26 +749,28 @@ function songEditClass() {
       ad.present(ac);
     }
   }
+
   function U() {
-    E("Process Save button");
+    _log("Process Save button");
     var ac = new songObj();
     ac = S();
     if (ac != false) {
       if (!b) {
-        E("Adding song..");
+        _log("Adding song..");
         songManagerObj.addSong(ac, true, false);
         b = true;
       } else {
-        E("Updating song..");
-        songManagerObj.updateSong(ac, v, q, Z);
+        _log("Updating song..");
+        songManagerObj.updateSong(ac, v, _editPrimaryKey, Z);
       }
-      i.hide();
+      _panel.hide();
       return true;
     } else {
-      E("Extract Data failed");
+      _log("Extract Data failed");
       return false;
     }
   }
+
   function k() {
     var ac = b;
     b = false;
@@ -738,6 +778,7 @@ function songEditClass() {
       b = ac;
     }
   }
+
   function j() {
     var ad = new songObj();
     ad = S();
@@ -748,11 +789,12 @@ function songEditClass() {
           songManagerObj.addSong(ad, false, false);
           b = true;
         } else {
-          songManagerObj.updateSong(ad, v, q);
+          songManagerObj.updateSong(ad, v, _editPrimaryKey);
         }
       }
     }
   }
+
   function s() {
     var ac = $("#songnav_category2 option:selected").text();
     if (specialCategory(ac)) {
@@ -761,18 +803,22 @@ function songEditClass() {
       $("#songEdit_saveButtonID").show();
     }
   }
+
   function C() {
     var ac = "Song Add/Edit";
     var ad = "Do you want to CANCEL from Add/Edit Song panel?";
     vvConfirm(ac, ad, l);
   }
+
   function l() {
-    i.hide();
+    _panel.hide();
   }
+
   function G(ad) {
     var ac = ad.split('"');
     return ac[1];
   }
+
   function B(ac) {
     if (ac != "_ALL") {
       return true;
@@ -781,6 +827,7 @@ function songEditClass() {
       return false;
     }
   }
+
   function o(ac) {
     if (ac <= 5 && ac >= 1) {
       return true;
@@ -788,12 +835,15 @@ function songEditClass() {
       return false;
     }
   }
+
   function r(ac) {
     return true;
   }
+
   function M() {
     document.getElementById("se_sequenceID").value = "";
   }
+
   function x(af) {
     var ae = af.replace(/ /gi, "");
     if (ae == "") {
@@ -811,20 +861,22 @@ function songEditClass() {
       return true;
     }
   }
-  function h() {
-    var ai = new Date();
-    var ac = parseInt(ai.getMonth()) + 1;
-    var ae = ai.getDate();
-    var af = ai.getFullYear();
-    var ad = ai.getHours();
-    var ag = ai.getMinutes();
-    var ah = ac + "/" + ae + "/" + af + "  " + ad + ":" + ag;
-    E("Timestamp: " + ah);
-    return ah;
+
+  function _timestampNow() {
+    var now = new Date();
+    var month = parseInt(String(now.getMonth())) + 1;
+    var day = now.getDate();
+    var year = now.getFullYear();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var timestampStr = month + "/" + day + "/" + year + "  " + hours + ":" + minutes;
+    _log("Timestamp: " + timestampStr);
+    return timestampStr;
   }
-  function E(ac) {
-    if (y) {
-      air.trace("[SongEdit]...." + ac);
+
+  function _log(message) {
+    if (DEBUG_MODE) {
+      air.trace("[SongEdit]...." + message);
     }
   }
 }
