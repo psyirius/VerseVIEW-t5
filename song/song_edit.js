@@ -16,6 +16,7 @@ function songEditClass() {
 
   this.init = function init(bodyContent) {
     _log("Initialize Song Edit Panel");
+
     _fontFamily = ["Arial", "Times New Roman", "Calibri"];
     _body = bodyContent;
     _setupPanel();
@@ -147,11 +148,11 @@ function songEditClass() {
   }
 
   function T() {
-    var ac = 0;
-    var ad = _slideTabs.getTab(ac);
-    while (ad != null) {
-      _slideTabs.removeTab(ad);
-      ad = _slideTabs.getTab(ac);
+    var tabIndex = 0;
+    var tab = _slideTabs.getTab(tabIndex);
+    while (tab != null) {
+      _slideTabs.removeTab(tab);
+      tab = _slideTabs.getTab(tabIndex);
     }
     _slideNumber = 1;
   }
