@@ -1,13 +1,36 @@
 {
   "name": "verseview-ng",
-  "version": "0.0.0",
+  "version": "8.4.0",
   "private": true,
   "description": "VerseVIEW with modern stack possible",
   "scripts": {
-    "dev": "adl ./VerseVIEW-app.xml"
+    "dev": "pnpm build && adl ./VerseVIEW-app.xml",
+    "build": "pnpm build-src && pnpm build-styles",
+    "build-src": "tsc -p tsconfig.app.json",
+    "watch-src": "tsc -p tsconfig.app.json --watch",
+    "build-assets": "node build.assets.js",
+    "build-styles": "node build.styles.js"
   },
   "dependencies": {
+    "jquery": "^3.7.1",
+    "preact": "^10.18.1"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.22",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.31",
+    "postcss-alias": "^2.0.0",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-load-config": "^4.0.1",
+    "postcss-nested": "^6.0.1",
+    "postcss-preset-env": "^9.2.0",
+    "sass": "^1.69.4",
+    "stylelint": "^15.11.0",
+    "tailwindcss": "^3.3.3",
+    "tslib": "^2.6.2",
+    "es6-promise": "^4.2.8",
+    "typescript": "4.9.5"
   }
 }

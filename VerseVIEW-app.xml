@@ -6,7 +6,7 @@
 	<description>Bible and Song Presentation Software</description>
 	<copyright>Binu Ariyappallil Joseph</copyright>
 	<initialWindow>
-		<content>index.html</content>
+		<content>verseview.html</content>
 		<systemChrome>standard</systemChrome>
 		<transparent>false</transparent>
 		<visible>false</visible>

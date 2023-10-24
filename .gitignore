@@ -16,3 +16,10 @@ yarn-error.log*
 
 # Artifact files
 dist/
+
+# build
+js/app
+js/lib
+
+css/app
+css/lib
