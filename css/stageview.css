@@ -16,7 +16,7 @@
 	/* background-color: green; */
 	position:absolute; 
 	/*
-	background-image: url("background/bx.png");
+	background-image: url("../background/bx.png");
 	border-radius: 25px;
   border: 2px solid #73AD21;
   margin-right: 20px;
@@ -106,7 +106,7 @@ mark {
 	padding-top: 5px;
 	/*background-color: #edf5ff;
 	border: 2px solid red;*/
-	/*background-image: url("background/bx.png");*/
+	/*background-image: url("../background/bx.png");*/
 	z-index:5;
 }
 

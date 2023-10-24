@@ -22,7 +22,7 @@ a:active {
 
 body {
 	background-color: black;
-	background-image: url(graphics/background2.png);
+	background-image: url(../graphics/background2.png);
 	background-repeat: repeat-x;
 	/*COLOR:#000000; */
 	overflow: auto;
@@ -572,11 +572,11 @@ td.navtd {
 
 /*Rounded corner*/
 /* set millions of background images */
-.rbroundbox { background: url(./graphics/round/nt.gif) repeat; }
-.rbtop div { background: url(./graphics/round/tl.gif) no-repeat top left; }
-.rbtop { background: url(./graphics/round/tr.gif) no-repeat top right; }
-.rbbot div { background: url(./graphics/round/bl.gif) no-repeat bottom left; }
-.rbbot { background: url(./graphics/round/br.gif) no-repeat bottom right; }
+.rbroundbox { background: url(../graphics/round/nt.gif) repeat; }
+.rbtop div { background: url(../graphics/round/tl.gif) no-repeat top left; }
+.rbtop { background: url(../graphics/round/tr.gif) no-repeat top right; }
+.rbbot div { background: url(../graphics/round/bl.gif) no-repeat bottom left; }
+.rbbot { background: url(../graphics/round/br.gif) no-repeat bottom right; }
 
 /* height and width stuff, width not really nessisary. */
 .rbtop div, .rbtop, .rbbot div, .rbbot {
@@ -588,7 +588,7 @@ font-size: 1px;
 .rbroundbox { width: 100%; margin: 1em auto; }
 
 #sliderbg {
-    background:url(./lib/YahooUI/slider/assets/bg-fader.gif) 5px 0 no-repeat;
+    background:url(../lib/YahooUI/slider/assets/bg-fader.gif) 5px 0 no-repeat;
 }
 
 
