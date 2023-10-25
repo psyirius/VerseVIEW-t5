@@ -1,0 +1,1 @@
+VerseVIEW with more modern stack possible

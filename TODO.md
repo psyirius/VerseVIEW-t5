@@ -1,0 +1,31 @@
+TODO
+
+ - [ ] Build System
+   - [ ] SWC
+   - [ ] Typescript
+   - [ ] Rollup
+   - [ ] asconfigc
+   - [ ] preact + wmr?
+   - [ ] vite?
+   - [ ] ts-node
+   - [ ] Custom AMD/UMD loader with SWF support based on dojo
+ - [ ] JSX
+     - [ ] Preact + Hooks
+ - [ ] Style
+     - [ ] SASS
+     - [ ] PostCSS
+       - [ ] Autoprefixer
+       - [ ] Stylelint
+       - [ ] preset-env
+ - [ ] Polyfills
+   - [ ] Promise
+   - [ ] Symbol
+   - [ ] Array
+   - [ ] Object
+   - [ ] Map
+   - [ ] Set
+   - [ ] WeakMap
+   - [ ] WeakSet
+   - [ ] Proxy
+   - [ ] Reflect
+   - [ ] URL
