@@ -4,7 +4,11 @@ var verseIndex = 0;
 var bible = [];
 var content1 = [];
 var content2 = [];
-var numofch = [[0],
+
+// TODO: write jsdoc
+// [num_chapters, chapter_verses_1, ..., chapter_verses_n]
+const numofch = [
+  [0],
   [
     50, 31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33,
     38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36,
@@ -155,7 +159,9 @@ var numofch = [[0],
   [
     22, 20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24,
     21, 15, 27, 21,
-  ]];
+  ]
+];
+
 var colorChart = [
   "FFFFFF",
   "800000",
@@ -520,35 +526,42 @@ function presentTheme() {
   }
 }
 function setFontForList() {
-  const a = bibleVersionArray[vvConfigObj.get_version1()][6];
-  $("#bookList").css("font-family", a);
-  $("#chapterList").css("font-family", a);
-  $("#verseList").css("font-family", a);
-  $("#recentSel").css("font-family", a);
-}
-function putbook() {
-  clearSelectList("bookList");
+  const fontFamily = bibleVersionArray[vvConfigObj.get_version1()][6];
 
+  $("#bookList").css("font-family", fontFamily);
+  $("#chapterList").css("font-family", fontFamily);
+  $("#verseList").css("font-family", fontFamily);
+  $("#recentSel").css("font-family", fontFamily);
+}
+
+function putbook() {
+  /** @type {HTMLSelectElement} */
   const booksSelect = document.getElementById("bookList");
+  const jqe = $(booksSelect);
+
+  jqe.empty();
 
   const booksInEnglish = vvConfigObj.get_listinenglish();
   const numBooks = booknames.length;
 
   for (let i = 0; i < numBooks; i++) {
-    booksSelect.options[i] = new Option(
-        (booksInEnglish ? default_booknames : booknames)[i],
-        String(i)
+    jqe.append(
+        new Option(
+            (booksInEnglish ? default_booknames : booknames)[i],
+            String(i)
+        )
     );
   }
-  
+
   booksSelect.selectedIndex = 0;
 
   setFontForList();
 }
+
 function putch(b, a) {
   clearSelectList("chapterList");
-  val = document.getElementById("bookList").selectedIndex + 1;
-  for (i = 0; i < numofch[val][0]; i++) {
+  let val = document.getElementById("bookList").selectedIndex + 1;
+  for (let i = 0; i < numofch[val][0]; i++) {
     document.getElementById("chapterList").options[i] = new Option(i + 1, i);
   }
   if (b == null) {
