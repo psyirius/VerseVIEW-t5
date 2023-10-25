@@ -69,6 +69,4 @@ class Song {
     }
 }
 
-
-vvw.provide('vvw.song')
-vvw.song.Song = Song;
+vvw.provide('vvw.song').Song = Song;

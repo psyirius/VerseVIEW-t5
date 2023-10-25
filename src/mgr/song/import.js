@@ -104,5 +104,4 @@ class SongImporter {
   }
 }
 
-vvw.provide('vvw.song')
-vvw.song.Importer = SongImporter;
+vvw.provide('vvw.song').Importer = SongImporter;

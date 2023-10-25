@@ -766,8 +766,7 @@ class SongEditor {
       var ac = _slideTabs.get("activeIndex");
       var ae = S();
       if (ae != false) {
-        var ad = new songPresentObj();
-        ad.init(ae);
+        var ad = new vvw.song.Presenter(ae);
         ad.present(ac);
       }
     }
@@ -904,5 +903,4 @@ class SongEditor {
   }
 }
 
-vvw.provide("vvw.song");
-vvw.song.Editor = SongEditor;
+vvw.provide("vvw.song").Editor = SongEditor;

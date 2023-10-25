@@ -166,8 +166,7 @@ function schedule() {
       if (X.isSong) {
         var ac = X.songID;
         var ab = songManagerObj.getSongObjWithID(ac);
-        var aa = new songPresentObj();
-        aa.init(ab);
+        var aa = new vvw.song.Presenter(ab);
         aa.present();
       } else {
         present_external(X.book, X.ch, X.ver);
@@ -180,8 +179,7 @@ function schedule() {
       if (X.isSong) {
         var ac = X.songID;
         var ab = songManagerObj.getSongObjWithID(ac);
-        var aa = new songPresentObj();
-        aa.init(ab);
+        var aa = new vvw.song.Presenter(ab);
         aa.present(Y);
       } else {
         present_external(X.book, X.ch, X.ver);
@@ -342,14 +340,12 @@ function schedule() {
             var al = "schlyricsID" + ap;
             document.getElementById(al).style.fontFamily = ak;
             document.getElementById(al).style.fontSize = X + "px";
-            ab[ap] = new songLyricsClass();
-            ab[ap].init(ar, al, ap, 1);
+            ab[ap] = new vvw.song.Lyrics(ar, al, ap, 1);
             if (ac) {
               var aa = "schlyrics2ID" + ap;
               document.getElementById(aa).style.fontFamily = am;
               document.getElementById(aa).style.fontSize = X + "px";
-              ag[ap] = new songLyricsClass();
-              ag[ap].init(ar, aa, ap, 2);
+              ag[ap] = new vvw.song.Lyrics(ar, aa, ap, 2);
             }
           }
           $("#sch_show_in_lyrics").text("Show in Lyrics Tab");

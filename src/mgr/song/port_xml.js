@@ -1,4 +1,4 @@
-function songPortXML() {
+function SongPortXML(r, t, s, u) {
   this.init = p;
   this.exportAll = l;
   this.exportByCat = f;
@@ -9,6 +9,9 @@ function songPortXML() {
   var j = null;
   var k = 0;
   var d = null;
+
+  this.init(r, t, s, u)
+
   function p(r, t, s, u) {
     c = r;
     m = t;
@@ -390,3 +393,5 @@ function songPortXML() {
     return t;
   }
 }
+
+vvw.provide('vvw.song').PortXML = SongPortXML;
