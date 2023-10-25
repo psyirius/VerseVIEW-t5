@@ -3,15 +3,16 @@
 	<menu label="VerseVIEW">
 		<!-- <menuItem label="Presentation Setup" onSelect="show_present_setup_UI" /> -->
 		<menuItem label="Remote VerseVIEW" onSelect="remoteVV_UI" />
-		<menuItem label="Check for Updates" onSelect="show_updateVV_UI" /> 
+		<menuItem label="Check for Updates" onSelect="show_updateVV_UI" />
 		<menuItem type="separator" />
- 		<menuItem label="Exit" onSelect="verseviewExit" />
+		<menuItem label="Exit" onSelect="verseviewExit" />
 	</menu>
 	<menu label="Bible">
 		<menuItem label="Add Version" onSelect="add_bible_version" />
 		<menuItem label="Select Version" onSelect="setup_bible_version" />
 		<menuItem label="Manage Version" onSelect="show_bible_manage" />
-		<!--<menuItem type="separator" />
+		<!--<menuItem
+		type="separator" />
 		<menuItem label="Edit Verse" onSelect="show_editVerse_UI" /> -->
 	</menu>
 	<menu label="Song">

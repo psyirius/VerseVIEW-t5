@@ -157,7 +157,7 @@ class SongNavigator {
         function R() {
             var am = document.getElementById("songnav_category").selectedIndex;
             var al = document.getElementById("songnav_category").options[am].text;
-            G("Selected Category Value: " + al);
+            __log("Selected Category Value: " + al);
             $("#songnav_editbox").val("");
             setTag2All();
             ag = false;
@@ -185,7 +185,7 @@ class SongNavigator {
             songEditObj.showEditPanel(null, al, null);
         }
         function z() {
-            G("Launch panel edit song..");
+            __log("Launch panel edit song..");
             var al = true;
             songEditObj.showEditPanel(y, al, a, ag);
         }
@@ -193,11 +193,11 @@ class SongNavigator {
             f = new Array();
             var au = document.getElementById("songnav_editbox").value;
             au = $.trim(au);
-            G("|" + au + "|");
-            G("Search Flag " + al);
+            __log("|" + au + "|");
+            __log("Search Flag " + al);
             var at = au.split(" ");
             var aq = at.length;
-            G("Words " + aq);
+            __log("Words " + aq);
             if (al == SEARCH_TITLE && aq == 1) {
                 var av = an.data.length;
                 for (var ap = 0; ap < av; ap++) {
@@ -209,8 +209,8 @@ class SongNavigator {
                         }
                     }
                 }
-                G("Keywords Length: " + f.length);
-                G("Keywords: " + f);
+                __log("Keywords Length: " + f.length);
+                __log("Keywords: " + f);
                 if (!P) {
                     o();
                 } else {
@@ -228,7 +228,7 @@ class SongNavigator {
         function o() {
             var an = wordbrain.getSuggestions();
             var aq = an.concat(f);
-            G("Suggested word - concatenated : " + aq);
+            __log("Suggested word - concatenated : " + aq);
             var am = aq.length;
             if (am > 0) {
                 if (am > aa) {
@@ -275,7 +275,7 @@ class SongNavigator {
             YAHOO.example.Data.songTitle.length = 0;
             if (ap.data != null) {
                 var au = ap.data.length;
-                G("update_songList: Number of songs: " + au);
+                __log("update_songList: Number of songs: " + au);
                 var an = 0;
                 var aw = "";
                 for (var ar = 0; ar < au; ar++) {
@@ -365,11 +365,11 @@ class SongNavigator {
             al.present();
         }
         function O() {
-            G("Calling prev slide from song_nav.js");
+            __log("Calling prev slide from song_nav.js");
             call_prevSlide();
         }
         function k() {
-            G("Calling next slide from song_nav.js");
+            __log("Calling next slide from song_nav.js");
             call_nextSlide();
         }
         function h() {
@@ -559,7 +559,7 @@ class SongNavigator {
             }
             document.getElementById("ly_tags").innerHTML = "";
             if (at.tags != null && at.tags != "") {
-                G("Tags : " + at.tags);
+                __log("Tags : " + at.tags);
                 var aE = at.tags.split(",");
                 var al = aE.length;
                 var ap = "";
@@ -572,7 +572,7 @@ class SongNavigator {
                         "</button>\n";
                     ap += ao;
                 }
-                G("Tags Content : " + ap);
+                __log("Tags Content : " + ap);
                 document.getElementById("ly_tags").innerHTML = ap;
                 for (var aD = 0; aD < al; aD++) {
                     var ax = "tag_" + aD;
@@ -601,7 +601,7 @@ class SongNavigator {
             songManagerObj.searchRecords(an, SEARCH_AUTHOR);
         }
         function D(ao, al) {
-            G("Search Complete " + ao);
+            __log("Search Complete " + ao);
             if (ao.data != null) {
                 ag = true;
                 $("#search_error_notification").html("");
@@ -664,7 +664,7 @@ class SongNavigator {
         function H() {
             m = document.getElementById("songnav_filterbox").value;
             m = m.toLowerCase();
-            G("Filter value changed..." + m);
+            __log("Filter value changed..." + m);
             R();
         }
         function C(ao, am) {
@@ -680,7 +680,7 @@ class SongNavigator {
                 return false;
             }
         }
-        function G(al) {
+        function __log(al) {
             if (E) {
                 air.trace("[SongNav]...." + al);
             }
