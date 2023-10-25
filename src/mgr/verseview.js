@@ -365,32 +365,28 @@ function getChapterValue() {
 function getVerseValue() {
   return document.getElementById("verseList").selectedIndex;
 }
+
 function launch(g) {
-  var j;
-  var c = document.getElementById("multipleVerseID").checked;
-  var e = 1;
-  if (c) {
-    e = 2;
-  }
-  var b = new Array();
-  var a = new Array();
+  const c = document.getElementById("multipleVerseID").checked;
+  let e = c ? 2 : 1;
   p_last_index = content1.length - 1;
-  var h = 0;
+  let h;
   h = p_last_index + 1;
-  j = p_last_index;
-  b = content1;
-  a = content2;
-  if (e == 2) {
-    var l = h % 2;
-    if (l == 0) {
+  let j = p_last_index;
+  let b = content1;
+  let a = content2;
+  if (e === 2) {
+    const l = h % 2;
+    if (l === 0) {
       j = parseInt(h / 2) - 1;
-      for (var f = 0; f <= j; f++) {
+      for (let f = 0; f <= j; f++) {
         b[f] = content1[f * 2] + "<BR>" + content1[f * 2 + 1];
         a[f] = content2[f * 2] + "<BR>" + content2[f * 2 + 1];
       }
     } else {
       j = parseInt(h / 2);
-      for (var f = 0; f < j; f++) {
+      let f;
+      for (f = 0; f < j; f++) {
         b[f] = content1[f * 2] + "<BR>" + content1[f * 2 + 1];
         a[f] = content2[f * 2] + "<BR>" + content2[f * 2 + 1];
       }
@@ -398,10 +394,10 @@ function launch(g) {
       a[f] = content2[f * 2];
     }
   }
-  var k = parseInt(g / e);
+  const k = parseInt(g / e);
   if (vvConfigObj.get_singleVersion()) {
-    var d = a.length;
-    for (f = 0; f < d; f++) {
+    const d = a.length;
+    for (let f = 0; f < d; f++) {
       a[f] = "";
     }
   }
@@ -431,17 +427,11 @@ function loadBookNames(a) {
   setPrimaryBooknames();
 }
 function getSingleVerse(j, f, k, e) {
-  var l;
-  var g = j * 1 + 1;
-  var a = f * 1 + 1;
-  var h = k * 1 + 1;
-  var d = getVerseFromArray(g, a, h);
-  if (e == 1) {
-    l = bibledbObj[1].getSingleVerseFromBuffer(d - 1);
-  } else {
-    l = bibledbObj[2].getSingleVerseFromBuffer(d - 1);
-  }
-  return l;
+  const g = j * 1 + 1;
+  const a = f * 1 + 1;
+  const h = k * 1 + 1;
+  const d = getVerseFromArray(g, a, h);
+  return (e === 1) ? bibledbObj[1].getSingleVerseFromBuffer(d - 1) : bibledbObj[2].getSingleVerseFromBuffer(d - 1);
 }
 function present() {
   bookIndex = document.getElementById("bookList").selectedIndex;
@@ -475,10 +465,9 @@ function present_external(a, h, e) {
   disableNavButtons(false);
 }
 function getFooter() {
-  let b;
   let a = bibleVersionArray[vvConfigObj.get_version1()][3];
   let c = bibleVersionArray[vvConfigObj.get_version2()][3];
-  b = a + " / " + c;
+  let b = a + " / " + c;
   if (a === "public") {
     a = "Public Domain";
   }
@@ -498,11 +487,7 @@ function getFooter() {
     b = a;
   }
   if (parseInt(p_text_orientation) === 2) {
-    if (a === "Public Domain") {
-      b = "";
-    } else {
-      b = a;
-    }
+    b = (a === "Public Domain") ? "" : a;
   }
   return b;
 }
@@ -536,8 +521,8 @@ function setFontForList() {
 
 function putbook() {
   /** @type {HTMLSelectElement} */
-  const booksSelect = document.getElementById("bookList");
-  const jqe = $(booksSelect);
+  const bookSelect = document.getElementById("bookList");
+  const jqe = $(bookSelect);
 
   jqe.empty();
 
@@ -553,26 +538,33 @@ function putbook() {
     );
   }
 
-  booksSelect.selectedIndex = 0;
+  bookSelect.selectedIndex = 0;
 
   setFontForList();
 }
 
-function putch(b, a) {
-  clearSelectList("chapterList");
-  let val = document.getElementById("bookList").selectedIndex + 1;
-  for (let i = 0; i < numofch[val][0]; i++) {
-    document.getElementById("chapterList").options[i] = new Option(i + 1, i);
+function putch(selectedIndex, a) {
+  /** @type {HTMLSelectElement} */
+  const chapterSelect = document.getElementById("chapterList");
+  /** @type {HTMLSelectElement} */
+  const bookSelect = document.getElementById("bookList");
+  const jqe = $(chapterSelect);
+
+  const val = bookSelect.selectedIndex + 1;
+  const numChapters = numofch[val][0];
+  for (let i = 0; i < numChapters; i++) {
+    jqe.append(
+        new Option(String(i + 1), String(i))
+    );
   }
-  if (b == null) {
-    document.getElementById("chapterList").selectedIndex = 0;
-  } else {
-    document.getElementById("chapterList").selectedIndex = b;
-  }
+
+  chapterSelect.selectedIndex = (selectedIndex === null) ? 0 : selectedIndex;
+
   if (!a) {
     putver();
   }
 }
+
 function putver(a) {
   bookval = document.getElementById("bookList").selectedIndex + 1;
   chval = document.getElementById("chapterList").selectedIndex + 1;
