@@ -67,6 +67,9 @@ devDependencies:
   typescript:
     specifier: 4.9.5
     version: 4.9.5
+  wmr:
+    specifier: ^3.8.0
+    version: 3.8.0
 
 packages:
 
@@ -3098,6 +3101,14 @@ packages:
     hasBin: true
     dependencies:
       isexe: 2.0.0
+    dev: true
+
+  /wmr@3.8.0:
+    resolution: {integrity: sha512-W3f2nB80C9Y0uNZXWMoxINkz4HdBRxt5MvxmcFcMlO87Ybsf6ny23kVUUzU8RA2LX86CpReMHl2Y0BTMLezLRg==}
+    engines: {node: '>=12.17.x'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: true
 
   /wrap-ansi@7.0.0:
